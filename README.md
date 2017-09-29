@@ -1,1 +1,1 @@
-Initial commit
+Javascript library for Learning Analytics.
