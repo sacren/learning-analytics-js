@@ -27,7 +27,7 @@ jQuery(function($) {
 		$('form input').prop('disabled', true);
 		$('form + div').html(msg1);
 
-		$.post('https://mediafiles.uvu.edu/lib/extracted.php', $(this).serialize(), function(data) {
+		$.post('https://mediafiles.uvu.edu/lib/t/extracted.php', $(this).serialize(), function(data) {
 			d = $.parseJSON(data);
 			if (d.length === 0) {
 				$('form + div').html('No enrollment.');
