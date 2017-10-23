@@ -23,12 +23,12 @@ jQuery(function($) {
 		var msg1 = 'Pulling data, please wait...';
 		var msg2 = 'Overview user percentage is ';
 		var pattern = /overview/i;
-		var d = {}, a = [], b = [];
+		var d = {}, a = [], b = [], n = 0, m = 0;
 
 		$('form input').prop('disabled', true);
 		$('form + div').html(msg1);
 
-		$.post('https://mediafiles.uvu.edu/lib/t/extracted.php', $(this).serialize(), function(data) {
+		$.post('https://mediafiles.uvu.edu/lib/extracted.php', $(this).serialize(), function(data) {
 			d = $.parseJSON(data);
 			if (d.length === 0) {
 				$('form + div').html('No enrollment.');
@@ -44,29 +44,29 @@ jQuery(function($) {
 					continue;
 
 				if (course_id === course_selected) {
-					a.push(uid);
+					n++;
 
 					if (pattern.test(req))
-						b.push(uid);
+						m++;
 				}
 			}
 
-			if (a.length === 0) {
+			if (n === 0) {
 				$('form + div').html('No enrollment.');
 				return false;
 			}
 
-			if (b.length === 0) {
+			if (m === 0) {
 				$('form + div').html(msg2 + '0.');
 				return false;
 			}
 
-			if (a.length === b.length) {
+			if (n === m) {
 				$('form + div').html(msg2 + '100%.');
 				return false;
 			}
 
-			d = b.length / a.length * 100;
+			d = m / n * 100;
 
 			$('form + div').html(msg2 + d.toPrecision(2) + '%.');
 

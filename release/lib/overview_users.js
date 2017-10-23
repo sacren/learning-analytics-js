@@ -23,12 +23,12 @@ jQuery(function($) {
 		var msg1 = 'Pulling data, please wait...';
 		var msg2 = 'Overview page users are ';
 		var pattern = /overview/i;
-		var d = {}, a = [];
+		var d = {}, a = [], n = 0;
 
 		$('form input').prop('disabled', true);
 		$('form + div').html(msg1);
 
-		$.post('https://mediafiles.uvu.edu/lib/t/extracted.php', $(this).serialize(), function(data) {
+		$.post('https://mediafiles.uvu.edu/lib/extracted.php', $(this).serialize(), function(data) {
 			d = $.parseJSON(data);
 			if (d.length === 0) {
 				$('form + div').html('No enrollment.');
@@ -44,13 +44,13 @@ jQuery(function($) {
 					continue;
 
 				if (course_id === course_selected && pattern.test(req))
-					a.push(uid);
+					n++;
 			}
 
-			if (a.length === 0 || a.length === 1)
+			if (n === 0 || n === 1)
 				msg2 = msg2.replace(/users/, 'user').replace(/are/, 'is');
 
-			$('form + div').html(msg2 + a.length + '.');
+			$('form + div').html(msg2 + n + '.');
 
 		}).fail(function() {
 			alert('Error!');
