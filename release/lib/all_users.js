@@ -19,15 +19,17 @@ jQuery(function($) {
 	}
 
 	$('form').submit(function() {
-		var course_selected = parseInt($('select option:selected').val());
-		var msg1 = 'Pulling data, please wait...';
-		var msg2 = 'All users are ';
-		var d = {}, a = [], n = 0;
+		var url = 'https://mediafiles.uvu.edu/lib/extracted.php';
+		var msg = 'Pulling data, please wait...';
 
 		$('form input').prop('disabled', true);
-		$('form + div').html(msg1);
+		$('form + div').html(msg);
 
-		$.post('https://mediafiles.uvu.edu/lib/t/extracted.php', $(this).serialize(), function(data) {
+		$.post(url, $(this).serialize(), function(data) {
+			var course_selected = parseInt($('select option:selected').val());
+			var msg = 'All users are ';
+			var d = {}, a = [], n;
+
 			d = $.parseJSON(data);
 			if (d.length === 0) {
 				$('form + div').html('No enrollment.');
@@ -38,17 +40,18 @@ jQuery(function($) {
 				var course_id = parseInt(d[i]['course_id']);
 				var uid = parseInt(d[i]['user_id']);
 
-				if (a.some(function(m) { return m === uid; }))
+				if (a.some(function(x) { return x === uid; }))
 					continue;
 
 				if (course_id === course_selected)
-					n++;
+					a.push(uid);
 			}
 
+			n = a.length;
 			if (n === 0 || n === 1)
-				msg2 = msg2.replace(/users/, 'user').replace(/are/, 'is');
+				msg = msg.replace(/users/, 'user').replace(/are/, 'is');
 
-			$('form + div').html(msg2 + n + '.');
+			$('form + div').html(msg + n + '.');
 
 		}).fail(function() {
 			alert('Error!');
