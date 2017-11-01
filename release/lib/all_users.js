@@ -40,10 +40,10 @@ jQuery(function($) {
 				var course_id = parseInt(d[i]['course_id']);
 				var uid = parseInt(d[i]['user_id']);
 
-				if (a.some(function(x) { return x === uid; }))
+				if (course_id !== course_selected)
 					continue;
 
-				if (course_id === course_selected)
+				if (!a.some(function(x) { return x === uid; }))
 					a.push(uid);
 			}
 

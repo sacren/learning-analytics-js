@@ -29,8 +29,7 @@ jQuery(function($) {
 			var course_selected = parseInt($('select option:selected').val());
 			var msg = 'Overview user percentage is ';
 			var pattern = /overview/i;
-			var d = {}, a = [], n, m = 0;
-			var p;
+			var d = {}, a = [], b = [], n, m, p;
 
 			d = $.parseJSON(data);
 			if (d.length === 0) {
@@ -41,19 +40,22 @@ jQuery(function($) {
 			for (var i in d) {
 				var course_id = parseInt(d[i]['course_id']);
 				var uid = parseInt(d[i]['user_id']);
-				var req = d[i]['http_request_clean'];
+				var match = d[i]['http_request_clean'];
 
-				if (a.some(function(x) { return x === uid; }))
+				if (course_id !== course_selected)
 					continue;
 
-				if (course_id === course_selected) {
+				if (!a.some(function(x) { return x === uid; }))
 					a.push(uid);
-					if (pattern.test(req))
-						m++;
-				}
+
+				if (pattern.test(match) &&
+				    !b.some(function(x) { return x === uid; }))
+					b.push(uid);
 			}
 
 			n = a.length;
+			m = b.length;
+
 			if (n === 0) {
 				$('form + div').html('No enrollment.');
 				return false;
