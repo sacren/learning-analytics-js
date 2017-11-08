@@ -19,7 +19,7 @@ jQuery(function($) {
 	}
 
 	$('form').submit(function() {
-		var url = 'https://mediafiles.uvu.edu/lib/t/extracted.php';
+		var url = 'https://mediafiles.uvu.edu/lib/extracted.php';
 		var msg = 'Pulling data, please wait...';
 
 		$('form input').prop('disabled', true);
@@ -27,13 +27,13 @@ jQuery(function($) {
 
 		$.post(url, $(this).serialize(), function(data) {
 			var course_selected = parseInt($('select option:selected').val());
-			var msg = 'All users are ';
+			var msg = 'users in total.';
 			var d = {}, a = [], n;
 
 			d = $.parseJSON(data);
 			if (d.length === 0) {
 				$('form + div').html('No enrollment.');
-				return false;
+				return;
 			}
 
 			for (var i in d) {
@@ -48,13 +48,21 @@ jQuery(function($) {
 			}
 
 			n = a.length;
-			if (n === 0 || n === 1)
-				msg = msg.replace(/users/, 'user').replace(/are/, 'is');
+			if (n === 0) {
+				$('form + div').html('No enrollment.');
+				return;
+			}
 
-			$('form + div').html(msg + n + '.');
+			if (n === 1) {
+				$('form + div').html('One user only.');
+				return;
+			}
+
+			msg = n + ' ' + msg;
+			$('form + div').html(msg);
 
 		}).fail(function() {
-			alert('Error!');
+			alert('Form submission error!');
 		});
 
 		return false;

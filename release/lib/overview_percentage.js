@@ -19,7 +19,7 @@ jQuery(function($) {
 	}
 
 	$('form').submit(function() {
-		var url = 'https://mediafiles.uvu.edu/lib/t/extracted.php';
+		var url = 'https://mediafiles.uvu.edu/lib/extracted.php';
 		var msg = 'Pulling data, please wait...';
 
 		$('form input').prop('disabled', true);
@@ -27,14 +27,14 @@ jQuery(function($) {
 
 		$.post(url, $(this).serialize(), function(data) {
 			var course_selected = parseInt($('select option:selected').val());
-			var msg = 'Overview user percentage is ';
+			var msg = 'users used overview page.';
 			var pattern = /overview/i;
 			var d = {}, a = [], b = [], n, m, p;
 
 			d = $.parseJSON(data);
 			if (d.length === 0) {
 				$('form + div').html('No enrollment.');
-				return false;
+				return;
 			}
 
 			for (var i in d) {
@@ -58,24 +58,25 @@ jQuery(function($) {
 
 			if (n === 0) {
 				$('form + div').html('No enrollment.');
-				return false;
+				return;
 			}
 
 			if (m === 0) {
-				$('form + div').html(msg + '0.');
-				return false;
+				$('form + div').html('No user used overview page.');
+				return;
 			}
 
 			if (n === m) {
-				$('form + div').html(msg + '100%.');
-				return false;
+				$('form + div').html('All ' + msg);
+				return;
 			}
 
 			p = m / n * 100;
-			$('form + div').html(msg + p.toPrecision(2) + '%.');
+			msg = p.toPrecision(2) + '% ' + msg;
+			$('form + div').html(msg);
 
 		}).fail(function() {
-			alert('Error!');
+			alert('Form submission error!');
 		});
 
 		return false;
