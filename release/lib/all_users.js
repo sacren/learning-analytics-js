@@ -1,82 +1,81 @@
-jQuery(function($) {
-	function set_form() {
-		var option = new Option('Select Course', '');
+jQuery(function ($) {
+  var lax = window.lax
 
-		$('select').append(option);
+  function setForm () {
+    var op1 = new window.Option('Select Course', '')
+    $('select').append(op1)
 
-		for (var i = 0; i < list.length; i++) {
-			var id = list[i];
-			var option = new Option(courses[id], id);
-			$('select').append(option);
-		}
+    for (var i = 0; i < lax.list.length; i++) {
+      var id = lax.list[i]
+      var op2 = new window.Option(lax.courses[id], id)
+      $('select').append(op2)
+    }
 
-		$('form input').val('Show All Users');
-	}
+    $('form input').val('Show All Users')
+  }
 
-	function set_display_msg() {
-		var msg = 'Would you like to show the number of all users?';
-		$('form + div').html(msg);
-	}
+  function setDisplayMessage () {
+    var msg = 'Would you like to show the number of all users?'
+    $('form + div').html(msg)
+  }
 
-	$('form').submit(function() {
-		var url = 'https://mediafiles.uvu.edu/lib/t/extracted.php';
-		var msg = 'Pulling data, please wait...';
+  $('form').submit(function () {
+    var url = 'https://mediafiles.uvu.edu/lib/extracted.php'
+    var msg = 'Pulling data, please wait...'
 
-		$('form input').prop('disabled', true);
-		$('form + div').html(msg);
+    $('form input').prop('disabled', true)
+    $('form + div').html(msg)
 
-		$.post(url, $(this).serialize(), function(data) {
-			var course_selected = parseInt($('select option:selected').val());
-			var msg = 'users in total.';
-			var d = {}, a = [], n;
+    $.post(url, $(this).serialize(), function (data) {
+      var selected = parseInt($('select option:selected').val())
+      var msg = 'users in total.'
+      var d = {}
+      var a = []
 
-			d = $.parseJSON(data);
-			if (d.length === 0) {
-				$('form + div').html('No enrollment.');
-				return;
-			}
+      d = $.parseJSON(data)
+      if (d.length === 0) {
+        $('form + div').html('No enrollment.')
+        return
+      }
 
-			for (var i in d) {
-				var course_id = parseInt(d[i]['course_id']);
-				var uid = parseInt(d[i]['user_id']);
+      for (var i in d) {
+        var courseId = parseInt(d[i]['course_id'])
+        var uid = parseInt(d[i]['user_id'])
 
-				if (course_id !== course_selected)
-					continue;
+        if (courseId !== selected) { continue }
 
-				if (!a.some(function(x) { return x === uid; }))
-					a.push(uid);
-			}
+        if (!a.some(function (x) { return x === uid })) { a.push(uid) }
+      }
 
-			n = a.length;
-			if (n === 0) {
-				$('form + div').html('No enrollment.');
-				return;
-			}
+      var n = a.length
+      if (n === 0) {
+        $('form + div').html('No enrollment.')
+        return
+      }
 
-			if (n === 1) {
-				$('form + div').html('One user only.');
-				return;
-			}
+      if (n === 1) {
+        $('form + div').html('One user only.')
+        return
+      }
 
-			msg = n + ' ' + msg;
-			$('form + div').html(msg);
+      msg = n + ' ' + msg
+      $('form + div').html(msg)
+    }).fail(function () {
+      window.alert('Error: Pulling data!')
+    })
 
-		}).fail(function() {
-			alert('Form submission error!');
-		});
+    return false
+  })
 
-		return false;
-	});
+  $('form > select').change(function () {
+    $('form input').prop('disabled', false)
+    setDisplayMessage()
+  })
 
-	$('form > select').change(function() {
-		$('form input').prop('disabled', false);
-		set_display_msg();
-	});
+  function init () {
+    setDisplayMessage()
+    setForm()
+  }
 
-	function init() {
-		set_display_msg();
-		set_form();
-	}
-
-	init();
-});
+  init()
+})
