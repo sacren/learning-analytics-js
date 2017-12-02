@@ -18,7 +18,7 @@ jQuery(function ($) {
 
     $.post(url, $(this).serialize(), function (data) {
       var course = $('select option:selected').text().replace(/-/g, ' ')
-      var msg = 'students visited ' + course + ' course overview page.'
+      var msg = ' students visited overview page.'
       var selected = parseInt($('select option:selected').val())
       var pattern = /overview/i
       var d = {}
@@ -53,7 +53,7 @@ jQuery(function ($) {
         return
       }
 
-      msg = n + ' ' + msg
+      msg = course + ': ' + n + msg
       $('form + div').html(msg)
     }).fail(function () {
       window.alert('Error: Pullling data!')
