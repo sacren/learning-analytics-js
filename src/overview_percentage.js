@@ -16,7 +16,7 @@ jQuery(function ($) {
     $('form + div').html(msg)
 
     $.post(url, $(this).serialize(), function (data) {
-      var course = $('select option:selected').text().replace(/-/g, ' ')
+      var course = $('select option:selected').text().replace(/-/g, ' ') + ': '
       var msg = ' students visited overview page.'
       var selected = parseInt($('select option:selected').val())
       var pattern = /overview/i
@@ -49,22 +49,22 @@ jQuery(function ($) {
       var m = b.length
 
       if (n === 0) {
-        $('form + div').html('No enrollment.')
+        $('form + div').html(course + 'No enrollment.')
         return
       }
 
       if (m === 0) {
-        $('form + div').html('No user visited overview page.')
+        $('form + div').html(course + 'No user visited overview page.')
         return
       }
 
       if (n === m) {
-        $('form + div').html('100%' + msg)
+        $('form + div').html(course + '100%' + msg)
         return
       }
 
       p = m / n * 100
-      msg = course + ': ' + p.toPrecision(2) + '%' + msg
+      msg = course + p.toPrecision(2) + '%' + msg
       $('form + div').html(msg)
     }).fail(function () {
       window.alert('Error: Pullling data!')
