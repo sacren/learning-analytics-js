@@ -59,7 +59,7 @@ jQuery(function ($) {
       }
 
       if (n === m) {
-        $('form + div').html('All ' + msg)
+        $('form + div').html('100%' + msg)
         return
       }
 
