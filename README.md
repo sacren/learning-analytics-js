@@ -1,1 +1,1 @@
-Javascript library for Learning Analytics.
+JS engine for Learning Analytics.
