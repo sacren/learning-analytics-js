@@ -1,34 +1,24 @@
 jQuery(function ($) {
-  var lax = window.lax
-
   function setForm () {
-    var op1 = new window.Option('Select Course', '')
-    $('select').append(op1)
-
-    for (var i = 0; i < lax.list.length; i++) {
-      var id = lax.list[i]
-      var op2 = new window.Option(lax.courses[id], id)
-      $('select').append(op2)
-    }
-
     $('form input').val('Show All Users')
   }
 
-  function setDisplayMessage () {
+  function setDisplayMsg () {
     var msg = 'Would you like to show the number of all users?'
     $('form + div').html(msg)
   }
 
   $('form').submit(function () {
-    var url = 'https://mediafiles.uvu.edu/lib/t/extracted.php'
+    var url = 'https://mediafiles.uvu.edu/lib/extracted.php'
     var msg = 'Pulling data, please wait...'
 
     $('form input').prop('disabled', true)
     $('form + div').html(msg)
 
     $.post(url, $(this).serialize(), function (data) {
+      var course = $('select option:selected').text().replace(/-/g, ' ') + ': '
+      var msg = ' students in total.'
       var selected = parseInt($('select option:selected').val())
-      var msg = 'users in total.'
       var d = {}
       var a = []
 
@@ -49,16 +39,16 @@ jQuery(function ($) {
 
       var n = a.length
       if (n === 0) {
-        $('form + div').html('No enrollment.')
+        $('form + div').html(course + 'No enrollment.')
         return
       }
 
       if (n === 1) {
-        $('form + div').html('One user only.')
+        $('form + div').html(course + 'One user only.')
         return
       }
 
-      msg = n + ' ' + msg
+      msg = course + n + msg
       $('form + div').html(msg)
     }).fail(function () {
       window.alert('Error: Pulling data!')
@@ -69,11 +59,11 @@ jQuery(function ($) {
 
   $('form > select').change(function () {
     $('form input').prop('disabled', false)
-    setDisplayMessage()
+    setDisplayMsg()
   })
 
   function init () {
-    setDisplayMessage()
+    setDisplayMsg()
     setForm()
   }
 

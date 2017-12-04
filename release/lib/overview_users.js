@@ -1,17 +1,6 @@
 jQuery(function ($) {
-  var lax = window.lax
 
   function setForm () {
-    var opt1 = new window.Option('Select Course', '')
-
-    $('select').append(opt1)
-
-    for (var i = 0; i < lax.list.length; i++) {
-      var id = lax.list[i]
-      var opt2 = new window.Option(lax.courses[id], id)
-      $('select').append(opt2)
-    }
-
     $('form input').val('Show Overview Users')
   }
 
@@ -21,15 +10,16 @@ jQuery(function ($) {
   }
 
   $('form').submit(function () {
-    var url = 'https://mediafiles.uvu.edu/lib/t/extracted.php'
+    var url = 'https://mediafiles.uvu.edu/lib/extracted.php'
     var msg = 'Pulling data, please wait...'
 
     $('form input').prop('disabled', true)
     $('form + div').html(msg)
 
     $.post(url, $(this).serialize(), function (data) {
+      var course = $('select option:selected').text().replace(/-/g, ' ') + ': '
+      var msg = ' students visited overview page.'
       var selected = parseInt($('select option:selected').val())
-      var msg = 'users visited overview page.'
       var pattern = /overview/i
       var d = {}
       var a = []
@@ -54,16 +44,16 @@ jQuery(function ($) {
 
       var n = a.length
       if (n === 0) {
-        $('form + div').html('No user visited overview page.')
+        $('form + div').html(course + 'No user visited overview page.')
         return
       }
 
       if (n === 1) {
-        $('form + div').html('One user visited overview page.')
+        $('form + div').html(course + 'One user visited overview page.')
         return
       }
 
-      msg = n + ' ' + msg
+      msg = course + n + msg
       $('form + div').html(msg)
     }).fail(function () {
       window.alert('Error: Pullling data!')
