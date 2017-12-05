@@ -78,7 +78,7 @@ jQuery(function ($) {
         return line1 + line2
       })
     }).fail(function () {
-      window.alert('Error: Pullling data!')
+      window.alert('Error: Pulling data!')
     })
 
     return false
