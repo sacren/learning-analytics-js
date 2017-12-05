@@ -16,15 +16,15 @@ jQuery(function ($) {
     $('form + div').html(msg)
 
     $.post(url, $(this).serialize(), function (data) {
-      var course = $('select option:selected').text().replace(/-/g, ' ') + ': '
-      var msg = ' students in total.'
+      var course = $('select option:selected').text().replace(/-/g, ' ')
+      var msg = ' students in total'
       var selected = parseInt($('select option:selected').val())
       var d = {}
       var a = []
 
       d = $.parseJSON(data)
       if (d.length === 0) {
-        $('form + div').html('No enrollment.')
+        $('form + div').html('Data error!')
         return
       }
 
@@ -39,17 +39,39 @@ jQuery(function ($) {
 
       var n = a.length
       if (n === 0) {
-        $('form + div').html(course + 'No enrollment.')
+        $('form + div').html(function () {
+          var openDiv = '<div>'
+          var closeDiv = '</div>'
+          var line1 = openDiv + course + closeDiv
+          var line2 = openDiv + 'No enrollment' + closeDiv
+
+          return line1 + line2
+        })
+
         return
       }
 
       if (n === 1) {
-        $('form + div').html(course + 'One user only.')
+        $('form + div').html(function () {
+          var openDiv = '<div>'
+          var closeDiv = '</div>'
+          var line1 = openDiv + course + closeDiv
+          var line2 = openDiv + 'One student in total' + closeDiv
+
+          return line1 + line2
+        })
+
         return
       }
 
-      msg = course + n + msg
-      $('form + div').html(msg)
+      $('form + div').html(function () {
+        var openDiv = '<div>'
+        var closeDiv = '</div>'
+        var line1 = openDiv + course + closeDiv
+        var line2 = openDiv + n + msg + closeDiv
+
+        return line1 + line2
+      })
     }).fail(function () {
       window.alert('Error: Pulling data!')
     })
