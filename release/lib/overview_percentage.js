@@ -9,15 +9,15 @@ jQuery(function ($) {
   }
 
   $('form').submit(function () {
-    var url = 'https://mediafiles.uvu.edu/lib/t/extracted.php'
+    var url = 'https://mediafiles.uvu.edu/lib/extracted.php'
     var msg = 'Pulling data, please wait...'
 
     $('form input').prop('disabled', true)
     $('form + div').html(msg)
 
     $.post(url, $(this).serialize(), function (data) {
-      var course = $('select option:selected').text().replace(/-/g, ' ') + ': '
-      var msg = ' students visited overview page.'
+      var course = $('select option:selected').text().replace(/-/g, ' ')
+      var msg = ' students visited overview page'
       var selected = parseInt($('select option:selected').val())
       var pattern = /overview/i
       var d = {}
@@ -49,25 +49,56 @@ jQuery(function ($) {
       var m = b.length
 
       if (n === 0) {
-        $('form + div').html(course + 'No enrollment.')
+        $('form + div').html(function () {
+          var openDiv = '<div>'
+          var closeDiv = '</div>'
+          var line1 = openDiv + course + closeDiv
+          var line2 = openDiv + 'No enrollment' + closeDiv
+
+          return line1 + line2
+        })
+
         return
       }
 
       if (m === 0) {
-        $('form + div').html(course + 'No user visited overview page.')
+        $('form + div').html(function () {
+          var openDiv = '<div>'
+          var closeDiv = '</div>'
+          var line1 = openDiv + course + closeDiv
+          var line2 = openDiv + 'No user visited overview page' + closeDiv
+
+          return line1 + line2
+        })
+
         return
       }
 
       if (n === m) {
-        $('form + div').html(course + '100%' + msg)
+        $('form + div').html(function () {
+          var openDiv = '<div>'
+          var closeDiv = '</div>'
+          var line1 = openDiv + course + closeDiv
+          var line2 = openDiv + '100%' + msg + closeDiv
+
+          return line1 + line2
+        })
+
         return
       }
 
       p = m / n * 100
-      msg = course + p.toPrecision(2) + '%' + msg
-      $('form + div').html(msg)
+      msg = p.toPrecision(2) + '%' + msg
+      $('form + div').html(function () {
+        var openDiv = '<div>'
+        var closeDiv = '</div>'
+        var line1 = openDiv + course + closeDiv
+        var line2 = openDiv + msg + closeDiv
+
+        return line1 + line2
+      })
     }).fail(function () {
-      window.alert('Error: Pullling data!')
+      window.alert('Error: Pulling data!')
     })
 
     return false
