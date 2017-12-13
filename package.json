@@ -1,0 +1,16 @@
+{
+  "name": "liblax",
+  "version": "0.0.1",
+  "description": "JS engine for Learning Analytics.",
+  "main": "dist/liblax.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sacren/liblax.git"
+  },
+  "keywords": [],
+  "author": "Jεan Sacren <sakiwit@gmail.com>",
+  "license": "ISC"
+}
