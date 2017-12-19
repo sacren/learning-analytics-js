@@ -25,9 +25,21 @@ module.exports = function(grunt) {
       options: {
         banner: '<%= banner %>'
       },
-      dist: {
-        src: '<%= concat.dist.dest %>',
-        dest: 'dist/<%= pkg.name %>.min.js'
+      common: {
+        src: 'release/lib/common.js',
+        dest: 'dist/common.js'
+      },
+      all_users: {
+        src: 'release/lib/all_users.js',
+        dest: 'dist/all_users.js'
+      },
+      overview_users: {
+        src: 'release/lib/overview_users.js',
+        dest: 'dist/overview_users.js'
+      },
+      overview_percentage: {
+        src: 'release/lib/overview_percentage.js',
+        dest: 'dist/overview_percentage.js'
       }
     },
     jshint: {
