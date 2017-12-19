@@ -1,6 +1,6 @@
 {
   "name": "liblax",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "JS engine for Learning Analytics.",
   "main": "dist/liblax.js",
   "scripts": {
