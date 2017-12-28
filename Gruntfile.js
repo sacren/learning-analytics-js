@@ -5,7 +5,7 @@ module.exports = function (grunt) {
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
     banner: '/*! <%= pkg.title || pkg.name %> v<%= pkg.version %> ' +
-            '| (c) <%= pkg.author %> | <%= pkg.license %> */\n',
+            '| (c) <%= pkg.author %> | <%= pkg.license %> */',
     // Task configuration.
     concat: {
       options: {
