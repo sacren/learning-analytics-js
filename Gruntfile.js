@@ -22,19 +22,19 @@ module.exports = function (grunt) {
         banner: '<%= banner %>'
       },
       common: {
-        src: 'release/lib/common.js',
+        src: 'src/common.js',
         dest: 'dist/common.js'
       },
       all_users: {
-        src: 'release/lib/all_users.js',
+        src: 'src/all_users.js',
         dest: 'dist/all_users.js'
       },
       overview_users: {
-        src: 'release/lib/overview_users.js',
+        src: 'src/overview_users.js',
         dest: 'dist/overview_users.js'
       },
       overview_percentage: {
-        src: 'release/lib/overview_percentage.js',
+        src: 'src/overview_percentage.js',
         dest: 'dist/overview_percentage.js'
       }
     },
