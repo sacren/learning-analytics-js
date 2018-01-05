@@ -1,12 +1,12 @@
 /* global module:false */
 module.exports = function (grunt) {
-  var d = new Date()
   // Project configuration.
   grunt.initConfig({
     // Metadata.
+    d: new Date(),
     pkg: grunt.file.readJSON('package.json'),
     banner: '/*! <%= pkg.title || pkg.name %> v<%= pkg.version %> ' +
-            '| (c) <%= pkg.author %> | <%= pkg.license %> ' + d.getTime() + ' */',
+            '| (c) <%= pkg.author %> | <%= pkg.license %> <%= d.getTime() %> */',
     // Task configuration.
     concat: {
       options: {
