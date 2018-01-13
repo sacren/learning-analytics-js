@@ -4,7 +4,9 @@
   "description": "JS engine for Learning Analytics.",
   "main": "dist/liblax.js",
   "scripts": {
-    "test": "grunt"
+    "clean": "rm -rf dist && mkdir dist",
+    "installjq": "npm run clean && cp node_modules/jquery/dist/jquery.min.js dist",
+    "test": "npm run installjq && grunt"
   },
   "repository": {
     "type": "git",
