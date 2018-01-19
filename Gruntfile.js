@@ -26,6 +26,22 @@ module.exports = function (grunt) {
         src: 'src/common.js',
         dest: 'dist/common.js'
       },
+      overview_anytime: {
+        src: 'src/lesson_overview_anytime.js',
+        dest: 'dist/lesson_overview_anytime.js'
+      },
+      overview_before: {
+        src: 'src/lesson_overview_before.js',
+        dest: 'dist/lesson_overview_before.js'
+      },
+      overview_within: {
+        src: 'src/lesson_overview_within.js',
+        dest: 'dist/lesson_overview_within.js'
+      },
+      overview_after: {
+        src: 'src/lesson_overview_after.js',
+        dest: 'dist/lesson_overview_after.js'
+      },
       all_users: {
         src: 'src/all_users.js',
         dest: 'dist/all_users.js'
