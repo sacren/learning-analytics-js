@@ -4,7 +4,7 @@ jQuery(function ($) {
   }
 
   function setDisplayMsg () {
-    var msg = 'Would you like to show any date?'
+    var msg = 'Would you like to show the lesson overview at any time?'
     $('form + div').html(msg)
   }
 
