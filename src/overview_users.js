@@ -48,7 +48,7 @@ jQuery(function ($) {
           var openDiv = '<div>'
           var closeDiv = '</div>'
           var line1 = openDiv + course + closeDiv
-          var line2 = openDiv + 'No user visited overview page' + closeDiv
+          var line2 = openDiv + 'No one visited overview page' + closeDiv
 
           return line1 + line2
         })
