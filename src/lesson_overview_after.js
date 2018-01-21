@@ -1,6 +1,6 @@
 jQuery(function ($) {
   function setForm () {
-    $('form input').val('Show After the Date')
+    $('form input').val('Show Overview After')
   }
 
   function setDisplayMsg () {

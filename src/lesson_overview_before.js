@@ -1,6 +1,6 @@
 jQuery(function ($) {
   function setForm () {
-    $('form input').val('Show Before the Date')
+    $('form input').val('Show Overview Before')
   }
 
   function setDisplayMsg () {

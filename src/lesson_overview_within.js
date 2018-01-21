@@ -1,6 +1,6 @@
 jQuery(function ($) {
   function setForm () {
-    $('form input').val('Show Within the Date')
+    $('form input').val('Show Overview Within')
   }
 
   function setDisplayMsg () {

@@ -1,6 +1,6 @@
 jQuery(function ($) {
   function setForm () {
-    $('form input').val('Show Any Date')
+    $('form input').val('Show Overview Anytime')
   }
 
   function setDisplayMsg () {
