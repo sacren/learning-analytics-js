@@ -59,7 +59,7 @@ jQuery(function ($) {
           var openDiv = '<div>'
           var closeDiv = '</div>'
           var line1 = openDiv + course + closeDiv
-          var line2 = openDiv + 'No one visited overview pages' + closeDiv
+          var line2 = openDiv + 'Before the date range, no student visited overview page.' + closeDiv
 
           return line1 + line2
         })
@@ -72,7 +72,7 @@ jQuery(function ($) {
           var openDiv = '<div>'
           var closeDiv = '</div>'
           var line1 = openDiv + course + closeDiv
-          var line2 = openDiv + 'No user visited overview page' + closeDiv
+          var line2 = openDiv + 'Before the date range, no student visited overview page.' + closeDiv
 
           return line1 + line2
         })
@@ -85,7 +85,7 @@ jQuery(function ($) {
           var openDiv = '<div>'
           var closeDiv = '</div>'
           var line1 = openDiv + course + closeDiv
-          var line2 = openDiv + '100%' + msg + closeDiv
+          var line2 = openDiv + 'Before the date range, 100%' + msg + closeDiv
 
           return line1 + line2
         })
@@ -94,12 +94,12 @@ jQuery(function ($) {
       }
 
       p = m / n * 100
-      msg = p.toPrecision(2) + '%' + msg
+      msg = m + ' or ' + p.toPrecision(2) + '%' + msg
       $('form + div').html(function () {
         var openDiv = '<div>'
         var closeDiv = '</div>'
         var line1 = openDiv + course + closeDiv
-        var line2 = openDiv + msg + closeDiv
+        var line2 = openDiv + 'Before the date range, ' + msg + closeDiv
 
         return line1 + line2
       })
