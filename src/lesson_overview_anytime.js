@@ -65,8 +65,8 @@ jQuery(function ($) {
         $('form + div').html(function () {
           var openDiv = '<div>'
           var closeDiv = '</div>'
-          var line1 = openDiv + 'At any time of ' + course + ',' + closeDiv
-          var line2 = openDiv + 'No one visited overview page.' + closeDiv
+          var line1 = openDiv + course + closeDiv
+          var line2 = openDiv + 'At any time, no one visited overview page.' + closeDiv
 
           return line1 + line2
         })
@@ -78,8 +78,8 @@ jQuery(function ($) {
         $('form + div').html(function () {
           var openDiv = '<div>'
           var closeDiv = '</div>'
-          var line1 = openDiv + 'At any time of ' + course + ',' + closeDiv
-          var line2 = openDiv + m + ' or 100%' + msg + closeDiv
+          var line1 = openDiv + course + ',' + closeDiv
+          var line2 = openDiv + 'At any time, ' + m + ' or 100%' + msg + closeDiv
 
           return line1 + line2
         })
@@ -92,8 +92,8 @@ jQuery(function ($) {
       $('form + div').html(function () {
         var openDiv = '<div>'
         var closeDiv = '</div>'
-        var line1 = openDiv + 'At any time of ' + course + ',' + closeDiv
-        var line2 = openDiv + msg + closeDiv
+        var line1 = openDiv + course + ',' + closeDiv
+        var line2 = openDiv + 'At any time, ' + msg + closeDiv
 
         return line1 + line2
       })
