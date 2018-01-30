@@ -78,7 +78,7 @@ jQuery(function ($) {
         $('form + div').html(function () {
           var openDiv = '<div>'
           var closeDiv = '</div>'
-          var line1 = openDiv + course + ',' + closeDiv
+          var line1 = openDiv + course + closeDiv
           var line2 = openDiv + 'At any time, ' + m + ' or 100%' + msg + closeDiv
 
           return line1 + line2
@@ -92,7 +92,7 @@ jQuery(function ($) {
       $('form + div').html(function () {
         var openDiv = '<div>'
         var closeDiv = '</div>'
-        var line1 = openDiv + course + ',' + closeDiv
+        var line1 = openDiv + course + closeDiv
         var line2 = openDiv + 'At any time, ' + msg + closeDiv
 
         return line1 + line2
