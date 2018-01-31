@@ -66,7 +66,7 @@ jQuery(function ($) {
           var openDiv = '<div>'
           var closeDiv = '</div>'
           var line1 = openDiv + course + closeDiv
-          var line2 = openDiv + 'At any time, no one visited overview page.' + closeDiv
+          var line2 = openDiv + 'At any time, no student visited overview page.' + closeDiv
 
           return line1 + line2
         })
