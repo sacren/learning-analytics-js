@@ -89,7 +89,7 @@ jQuery(function ($) {
           var openDiv = '<div>'
           var closeDiv = '</div>'
           var line1 = openDiv + course + closeDiv
-          var line2 = openDiv + 'Within the date range, 100%' + msg + closeDiv
+          var line2 = openDiv + 'Within the date range, ' + m + ' or 100%' + msg + closeDiv
 
           return line1 + line2
         })
