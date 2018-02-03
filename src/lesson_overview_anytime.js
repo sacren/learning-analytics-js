@@ -21,8 +21,8 @@ jQuery(function ($) {
       var selected = parseInt($('select option:selected').val())
       var pattern = /overview/i
       var d = {}
-      var a = []
-      var b = []
+      var courseUsers = []
+      var overviewUsers = []
       var p
 
       d = $.parseJSON(data)
@@ -38,15 +38,15 @@ jQuery(function ($) {
 
         if (courseId !== selected) { continue }
 
-        if (!a.some(function (x) { return x === uid })) { a.push(uid) }
+        if (!courseUsers.some(function (x) { return x === uid })) { courseUsers.push(uid) }
 
-        if (pattern.test(match) && !b.some(function (x) { return x === uid })) {
-          b.push(uid)
+        if (pattern.test(match) && !overviewUsers.some(function (x) { return x === uid })) {
+          overviewUsers.push(uid)
         }
       }
 
-      var n = a.length
-      var m = b.length
+      var n = courseUsers.length
+      var m = overviewUsers.length
 
       if (n === 0) {
         $('form + div').html(function () {
