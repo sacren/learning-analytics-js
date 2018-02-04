@@ -1,4 +1,19 @@
 jQuery(function ($) {
+  function getLessonNumber (s) {
+    var lessonNumber
+    var tmp
+
+    tmp = s.split('/')
+    tmp = tmp[tmp.length - 1].split('-')
+
+    for (var i = 0; i < tmp.length; i++) {
+      lessonNumber = tmp[i]
+      if (!isNaN(lessonNumber)) { break }
+    }
+
+    return lessonNumber
+  }
+
   function setForm () {
     $('form input').val('Show Overview Anytime')
   }
