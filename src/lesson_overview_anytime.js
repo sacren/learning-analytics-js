@@ -37,8 +37,12 @@ jQuery(function ($) {
       var pattern = /overview/i
       var d = {}
       var courseUsers = []
-      var overviewUsers = []
+      var overviewUsers = {}
       var p
+
+      for (var k = 1; k < 20; k++) {
+        overviewUsers[k] = []
+      }
 
       d = $.parseJSON(data)
       if (d.length === 0) {
@@ -55,8 +59,12 @@ jQuery(function ($) {
 
         if (!courseUsers.some(function (x) { return x === uid })) { courseUsers.push(uid) }
 
-        if (pattern.test(match) && !overviewUsers.some(function (x) { return x === uid })) {
-          overviewUsers.push(uid)
+        if (pattern.test(match)) {
+          for (var j in overviewUsers) {
+            if (!overviewUsers[j].some(function (x) { return x === uid })) {
+              overviewUsers[j].push(uid)
+            }
+          }
         }
       }
 
