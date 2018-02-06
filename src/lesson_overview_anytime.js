@@ -26,6 +26,7 @@ jQuery(function ($) {
   $('form').submit(function () {
     var url = 'https://mediafiles.uvu.edu/lib/extracted.php'
     var msg = 'Pulling data, please wait...'
+    var i
 
     $('form input').prop('disabled', true)
     $('form + div').html(msg)
@@ -40,8 +41,8 @@ jQuery(function ($) {
       var overviewUsers = {}
       var p
 
-      for (var k = 1; k < 20; k++) {
-        overviewUsers[k] = []
+      for (i = 1; i < 20; i++) {
+        overviewUsers[i] = []
       }
 
       d = $.parseJSON(data)
@@ -50,7 +51,7 @@ jQuery(function ($) {
         return
       }
 
-      for (var i in d) {
+      for (i in d) {
         var courseId = parseInt(d[i]['course_id'])
         var uid = parseInt(d[i]['user_id'])
         var match = d[i]['http_request_clean']
@@ -60,9 +61,9 @@ jQuery(function ($) {
         if (!courseUsers.some(function (x) { return x === uid })) { courseUsers.push(uid) }
 
         if (pattern.test(match)) {
-          for (var j in overviewUsers) {
-            if (!overviewUsers[j].some(function (x) { return x === uid })) {
-              overviewUsers[j].push(uid)
+          for (i in overviewUsers) {
+            if (!overviewUsers[i].some(function (x) { return x === uid })) {
+              overviewUsers[i].push(uid)
             }
           }
         }
