@@ -35,7 +35,7 @@ jQuery(function ($) {
       var course = $('select option:selected').text().replace(/-/g, ' ')
       var msg = ' students visited overview page.'
       var selected = parseInt($('select option:selected').val())
-      var pattern = /overview/i
+      var pattern = /(week|lesson)-([1-9]|1[0-6])-overview|overview-(lesson|week)-([1-9]|1[0-6])/i
       var d = {}
       var courseUsers = []
       var overviewUsers = {}
@@ -55,16 +55,16 @@ jQuery(function ($) {
         var courseId = parseInt(d[i]['course_id'])
         var uid = parseInt(d[i]['user_id'])
         var match = d[i]['http_request_clean']
+        var lesson
 
         if (courseId !== selected) { continue }
 
         if (!courseUsers.some(function (x) { return x === uid })) { courseUsers.push(uid) }
 
         if (pattern.test(match)) {
-          for (i in overviewUsers) {
-            if (!overviewUsers[i].some(function (x) { return x === uid })) {
-              overviewUsers[i].push(uid)
-            }
+          lesson = getLessonNumber(match)
+          if (!overviewUsers[lesson].some(function (x) { return x === uid })) {
+            overviewUsers[lesson].push(uid)
           }
         }
       }
