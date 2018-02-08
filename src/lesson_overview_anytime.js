@@ -38,7 +38,9 @@ jQuery(function ($) {
       var pattern = /(week|lesson)-([1-9]|1[0-6])-overview|overview-(lesson|week)-([1-9]|1[0-6])/i
       var d = {}
       var courseUsers = []
-      var overviewUsers = {}
+      var overviewUsers = {
+        lessonId: []
+      }
       var p
 
       for (i = 1; i < 20; i++) {
@@ -63,6 +65,10 @@ jQuery(function ($) {
 
         if (pattern.test(match)) {
           lesson = getLessonNumber(match)
+          if (!overviewUsers.lessonId.some(function (x) { return x === lesson })) {
+            overviewUsers.lessonId.push(lesson)
+          }
+
           if (!overviewUsers[lesson].some(function (x) { return x === uid })) {
             overviewUsers[lesson].push(uid)
           }
