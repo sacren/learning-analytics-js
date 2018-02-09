@@ -43,10 +43,6 @@ jQuery(function ($) {
       }
       var p
 
-      for (i = 1; i < 20; i++) {
-        overviewUsers[i] = []
-      }
-
       d = $.parseJSON(data)
       if (d.length === 0) {
         $('form + div').html('No enrollment.')
@@ -69,8 +65,12 @@ jQuery(function ($) {
             overviewUsers.lessonId.push(lesson)
           }
 
-          if (!overviewUsers[lesson].some(function (x) { return x === uid })) {
-            overviewUsers[lesson].push(uid)
+          if (overviewUsers.hasOwnProperty(lesson)) {
+            if (!overviewUsers[lesson].some(function (x) { return x === uid })) {
+              overviewUsers[lesson].push(uid)
+            }
+          } else {
+            overviewUsers[lesson] = [ uid ]
           }
         }
       }
