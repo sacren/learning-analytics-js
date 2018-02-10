@@ -1,17 +1,17 @@
 jQuery(function ($) {
-  function getLessonNumber (s) {
-    var lessonNumber
+  function getLesson (s) {
+    var lesson
     var tmp
 
     tmp = s.split('/')
     tmp = tmp[tmp.length - 1].split('-')
 
     for (var i = 0; i < tmp.length; i++) {
-      lessonNumber = tmp[i]
-      if (!isNaN(lessonNumber)) { break }
+      lesson = tmp[i]
+      if (!isNaN(lesson)) { break }
     }
 
-    return lessonNumber
+    return lesson
   }
 
   function setForm () {
@@ -60,7 +60,7 @@ jQuery(function ($) {
         if (!courseUsers.some(function (x) { return x === uid })) { courseUsers.push(uid) }
 
         if (pattern.test(match)) {
-          lesson = getLessonNumber(match)
+          lesson = getLesson(match)
           if (!overviewUsers.lessonId.some(function (x) { return x === lesson })) {
             overviewUsers.lessonId.push(lesson)
           }
