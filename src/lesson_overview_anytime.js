@@ -76,7 +76,7 @@ jQuery(function ($) {
       }
 
       var n = courseUsers.length
-      var m = overviewUsers.length
+      var m = overviewUsers.lessonId.length
 
       if (n === 0) {
         $('form + div').html(function () {
@@ -96,7 +96,7 @@ jQuery(function ($) {
           var openDiv = '<div>'
           var closeDiv = '</div>'
           var line1 = openDiv + course + closeDiv
-          var line2 = openDiv + 'At any time, no student visited overview page.' + closeDiv
+          var line2 = openDiv + 'At any time, no student visited overview page of any lesson.' + closeDiv
 
           return line1 + line2
         })
