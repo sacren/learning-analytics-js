@@ -75,13 +75,14 @@ jQuery(function ($) {
         }
       }
 
+      var lessonMsg = ''
       var n = courseUsers.length
       var m = overviewUsers.lessonId.length
+      var openDiv = '<div>'
+      var closeDiv = '</div>'
 
       if (n === 0) {
         $('form + div').html(function () {
-          var openDiv = '<div>'
-          var closeDiv = '</div>'
           var line1 = openDiv + course + closeDiv
           var line2 = openDiv + 'No enrollment.' + closeDiv
 
@@ -93,8 +94,6 @@ jQuery(function ($) {
 
       if (m === 0) {
         $('form + div').html(function () {
-          var openDiv = '<div>'
-          var closeDiv = '</div>'
           var line1 = openDiv + course + closeDiv
           var line2 = openDiv + 'At any time, no student visited overview page of any lesson.' + closeDiv
 
@@ -104,26 +103,26 @@ jQuery(function ($) {
         return
       }
 
-      if (n === m) {
-        $('form + div').html(function () {
-          var openDiv = '<div>'
-          var closeDiv = '</div>'
-          var line1 = openDiv + course + closeDiv
-          var line2 = openDiv + 'At any time, ' + m + ' or 100%' + msg + closeDiv
+      for (var j = 0; j < m; j++) {
+        var lessonId = overviewUsers.lessonId[j]
+        var count = overviewUsers[lessonId].length
 
-          return line1 + line2
-        })
-
-        return
+        switch (count) {
+          case 0:
+            lessonMsg += openDiv + 'At any time, no ' + msg + closeDiv
+            break
+          case n:
+            lessonMsg += openDiv + 'At any time, ' + n + ' or 100%' + msg + closeDiv
+            break
+          default:
+            p = count / n * 100
+            lessonMsg += openDiv + 'Lesson ' + lessonId + ': ' + count + ' or ' + p.toPrecision(2) + '%' + msg + closeDiv
+        }
       }
 
-      p = m / n * 100
-      msg = m + ' or ' + p.toPrecision(2) + '%' + msg
       $('form + div').html(function () {
-        var openDiv = '<div>'
-        var closeDiv = '</div>'
-        var line1 = openDiv + course + closeDiv
-        var line2 = openDiv + 'At any time, ' + msg + closeDiv
+        var line1 = openDiv + 'At any time: ' + course + closeDiv
+        var line2 = lessonMsg
 
         return line1 + line2
       })
