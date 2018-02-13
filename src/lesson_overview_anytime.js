@@ -103,8 +103,8 @@ jQuery(function ($) {
         return
       }
 
-      for (var j = 0; j < m; j++) {
-        var lessonId = overviewUsers.lessonId[j]
+      for (i = 0; i < m; i++) {
+        var lessonId = overviewUsers.lessonId[i]
         var count = overviewUsers[lessonId].length
 
         switch (count) {
