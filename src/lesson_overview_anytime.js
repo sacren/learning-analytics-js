@@ -76,12 +76,12 @@ jQuery(function ($) {
       }
 
       var lessonMsg = ''
-      var n = courseUsers.length
-      var m = overviewUsers.lessonId.length
+      var userNumber = courseUsers.length
+      var lessonNumber = overviewUsers.lessonId.length
       var openDiv = '<div>'
       var closeDiv = '</div>'
 
-      if (n === 0) {
+      if (userNumber === 0) {
         $('form + div').html(function () {
           var line1 = openDiv + course + closeDiv
           var line2 = openDiv + 'No enrollment.' + closeDiv
@@ -92,7 +92,7 @@ jQuery(function ($) {
         return
       }
 
-      if (m === 0) {
+      if (lessonNumber === 0) {
         $('form + div').html(function () {
           var line1 = openDiv + course + closeDiv
           var line2 = openDiv + 'At any time, no student visited overview page of any lesson.' + closeDiv
@@ -103,7 +103,7 @@ jQuery(function ($) {
         return
       }
 
-      for (i = 0; i < m; i++) {
+      for (i = 0; i < lessonNumber; i++) {
         var lessonId = overviewUsers.lessonId[i]
         var count = overviewUsers[lessonId].length
 
@@ -111,11 +111,11 @@ jQuery(function ($) {
           case 0:
             lessonMsg += openDiv + 'At any time, no ' + msg + closeDiv
             break
-          case n:
-            lessonMsg += openDiv + 'At any time, ' + n + ' or 100%' + msg + closeDiv
+          case userNumber:
+            lessonMsg += openDiv + 'At any time, ' + userNumber + ' or 100%' + msg + closeDiv
             break
           default:
-            p = count / n * 100
+            p = count / userNumber * 100
             lessonMsg += openDiv + 'Lesson ' + lessonId + ': ' + count + ' or ' + p.toPrecision(2) + '%' + msg + closeDiv
         }
       }
