@@ -83,7 +83,7 @@ jQuery(function ($) {
 
       if (userNumber === 0) {
         $('form + div').html(function () {
-          var line1 = openDiv + course + closeDiv
+          var line1 = openDiv + 'At any time: ' + course + closeDiv
           var line2 = openDiv + 'No enrollment.' + closeDiv
 
           return line1 + line2
@@ -94,8 +94,8 @@ jQuery(function ($) {
 
       if (lessonNumber === 0) {
         $('form + div').html(function () {
-          var line1 = openDiv + course + closeDiv
-          var line2 = openDiv + 'At any time, no student visited overview page of any lesson.' + closeDiv
+          var line1 = openDiv + 'At any time: ' + course + closeDiv
+          var line2 = openDiv + 'No student visited overview page of any lesson.' + closeDiv
 
           return line1 + line2
         })
