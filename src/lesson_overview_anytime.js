@@ -14,6 +14,8 @@ jQuery(function ($) {
     return lesson
   }
 
+  function doLessonOrder (x, y) { return x - y }
+
   function setForm () {
     $('form input').val('Show Overview Anytime')
   }
@@ -104,7 +106,7 @@ jQuery(function ($) {
       }
 
       for (i = 0; i < lessonNumber; i++) {
-        var lessonId = overviewUsers.lessonId[i]
+        var lessonId = overviewUsers.lessonId.sort(doLessonOrder)[i]
         var count = overviewUsers[lessonId].length
 
         switch (count) {
