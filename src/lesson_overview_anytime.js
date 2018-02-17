@@ -21,7 +21,7 @@ jQuery(function ($) {
   }
 
   function setDisplayMsg () {
-    var msg = 'Would you like to show the lesson overview at any time?'
+    var msg = 'Would you like to show overview page per lesson at any time?'
     $('form + div').html(msg)
   }
 
