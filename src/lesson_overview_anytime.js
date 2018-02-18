@@ -111,10 +111,10 @@ jQuery(function ($) {
 
         switch (count) {
           case 0:
-            lessonMsg += openDiv + 'At any time, no ' + msg + closeDiv
+            lessonMsg += openDiv + 'Lesson ' + lessonId + ': ' + 'No ' + msg + closeDiv
             break
           case userNumber:
-            lessonMsg += openDiv + 'At any time, ' + userNumber + ' or 100%' + msg + closeDiv
+            lessonMsg += openDiv + 'Lesson ' + lessonId + ': ' + userNumber + ' or 100%' + msg + closeDiv
             break
           default:
             p = count / userNumber * 100
