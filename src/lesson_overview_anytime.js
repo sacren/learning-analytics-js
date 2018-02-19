@@ -124,7 +124,7 @@ jQuery(function ($) {
 
       $('form + div').html(function () {
         var line1 = openDiv + 'At any time: ' + course + closeDiv
-        var line2 = lessonMsg
+        var line2 = '<iframe srcdoc="' + lessonMsg + '"></iframe>'
 
         return line1 + line2
       })
