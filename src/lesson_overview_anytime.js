@@ -82,6 +82,8 @@ jQuery(function ($) {
       var lessonNumber = overviewUsers.lessonId.length
       var openDiv = '<div>'
       var closeDiv = '</div>'
+      var openArticle = '<article>'
+      var closeArticle = '</article>'
 
       if (userNumber === 0) {
         $('form + div').html(function () {
@@ -113,24 +115,21 @@ jQuery(function ($) {
           case 0:
             lessonMsg += openDiv + 'Lesson ' + lessonId + ':' + closeDiv
             lessonMsg += openDiv + 'No ' + msg + closeDiv
-            lessonMsg += '<p></p>'
             break
           case userNumber:
             lessonMsg += openDiv + 'Lesson ' + lessonId + ':' + closeDiv
             lessonMsg += openDiv + userNumber + ' or 100%' + msg + closeDiv
-            lessonMsg += '<p></p>'
             break
           default:
             p = count / userNumber * 100
             lessonMsg += openDiv + 'Lesson ' + lessonId + ':' + closeDiv
             lessonMsg += openDiv + count + ' or ' + p.toPrecision(2) + '%' + msg + closeDiv
-            lessonMsg += '<p></p>'
         }
       }
 
       $('form + div').html(function () {
         var line1 = openDiv + 'At any time: ' + course + closeDiv
-        var line2 = '<iframe srcdoc="' + lessonMsg + '"></iframe>'
+        var line2 = openArticle + lessonMsg + closeArticle
 
         return line1 + line2
       })
