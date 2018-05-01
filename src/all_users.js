@@ -7,8 +7,7 @@ var analytics = {
   },
 
   setDisplayMsg: function () {
-    var msg = 'Would you like to show the number of all users?'
-    $('form + div').html(msg)
+    $('form + div').html('Would you like to show the number of all users?')
   },
 
   setForm: function () {
@@ -25,14 +24,12 @@ var analytics = {
   submitForm: function () {
     $('form').submit(function () {
       var url = 'https://mediafiles.uvu.edu/lib/extracted.php'
-      var msg = 'Pulling data, please wait...'
 
       $('form input').prop('disabled', true)
-      $('form + div').html(msg)
+      $('form + div').html('Pulling data, please wait...')
 
       $.post(url, $(this).serialize(), function (data) {
         var course = $('select option:selected').text().replace(/-/g, ' ')
-        var msg = ' students in total'
         var selected = parseInt($('select option:selected').val())
         var d = {}
         var a = []
@@ -55,10 +52,8 @@ var analytics = {
         var n = a.length
         if (n === 0) {
           $('form + div').html(function () {
-            var openDiv = '<div>'
-            var closeDiv = '</div>'
-            var line1 = openDiv + course + closeDiv
-            var line2 = openDiv + 'No enrollment' + closeDiv
+            var line1 = '<div>' + course + '</div>'
+            var line2 = '<div>' + 'No enrollment' + '</div>'
 
             return line1 + line2
           })
@@ -68,10 +63,8 @@ var analytics = {
 
         if (n === 1) {
           $('form + div').html(function () {
-            var openDiv = '<div>'
-            var closeDiv = '</div>'
-            var line1 = openDiv + course + closeDiv
-            var line2 = openDiv + 'One student in total' + closeDiv
+            var line1 = '<div>' + course + '</div>'
+            var line2 = '<div>' + 'One student in total' + '</div>'
 
             return line1 + line2
           })
@@ -80,10 +73,8 @@ var analytics = {
         }
 
         $('form + div').html(function () {
-          var openDiv = '<div>'
-          var closeDiv = '</div>'
-          var line1 = openDiv + course + closeDiv
-          var line2 = openDiv + n + msg + closeDiv
+          var line1 = '<div>' + course + '</div>'
+          var line2 = '<div>' + n + ' students in total' + '</div>'
 
           return line1 + line2
         })
