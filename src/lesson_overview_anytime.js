@@ -1,4 +1,4 @@
-jQuery(function ($) {
+window.jQuery(function ($) {
   function getLesson (s) {
     var lesson
     var tmp

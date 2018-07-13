@@ -1,4 +1,4 @@
-jQuery(function ($) {
+window.jQuery(function ($) {
   function setForm () {
     $('form input').val('Show Overview After')
   }

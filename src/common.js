@@ -1,4 +1,4 @@
-jQuery(function ($) {
+window.jQuery(function ($) {
   function setForm () {
     var opt1 = new window.Option('Select Course', '')
     var list = [
