@@ -26,7 +26,7 @@ window.jQuery(function ($) {
   }
 
   $('form').submit(function () {
-    var url = 'https://mediafiles.uvu.edu/lib/extracted.php'
+    var url = 'https://mediafiles.uvu.edu/lib/pages.php'
     var msg = 'Pulling data, please wait...'
     var i
 
