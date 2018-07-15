@@ -1,4 +1,21 @@
 window.jQuery(function ($) {
+  function checkUrl (url) {
+    var forUvu = [
+      'for-uvu',
+      'github',
+      'io'
+    ]
+    var hostname = window.location.hostname.split('.')
+
+    if (hostname.every(function (x) {
+      return forUvu.includes(x)
+    })) {
+      return url.replace('pages', 'pages-for-uvu')
+    }
+
+    return url
+  }
+
   function setForm () {
     $('form input').val('Show Overview After')
   }
@@ -12,6 +29,7 @@ window.jQuery(function ($) {
     var url = 'https://mediafiles.uvu.edu/lib/pages.php'
     var msg = 'Pulling data, please wait...'
 
+    url = checkUrl(url)
     $('form input').prop('disabled', true)
     $('form + div').html(msg)
 

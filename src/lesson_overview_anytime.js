@@ -1,4 +1,21 @@
 window.jQuery(function ($) {
+  function checkUrl (url) {
+    var forUvu = [
+      'for-uvu',
+      'github',
+      'io'
+    ]
+    var hostname = window.location.hostname.split('.')
+
+    if (hostname.every(function (x) {
+      return forUvu.includes(x)
+    })) {
+      return url.replace('pages', 'pages-for-uvu')
+    }
+
+    return url
+  }
+
   function getLesson (s) {
     var lesson
     var tmp
@@ -30,6 +47,7 @@ window.jQuery(function ($) {
     var msg = 'Pulling data, please wait...'
     var i
 
+    url = checkUrl(url)
     $('form input').prop('disabled', true)
     $('form + div').html(msg)
 
