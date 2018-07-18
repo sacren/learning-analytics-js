@@ -6,7 +6,16 @@
   "scripts": {
     "build": "npm install",
     "clean": "rm -rf dist && mkdir dist",
-    "test": "npm run clean && grunt"
+    "test": "npm run clean && grunt",
+    "js-minify": "npm-run-all --parallel js-minify-*",
+    "js-minify-common": "uglifyjs src/common.js --compress typeofs=false --mangle --comments \"/^!/\" --output dist/common.min.js",
+    "js-minify-all_users": "uglifyjs src/all_users.js --compress typeofs=false --mangle --comments \"/^!/\" --output dist/all_users.min.js",
+    "js-minify-overview_users": "uglifyjs src/overview_users.js --compress typeofs=false --mangle --comments \"/^!/\" --output dist/overview_users.min.js",
+    "js-minify-overview_percentage": "uglifyjs src/overview_percentage.js --compress typeofs=false --mangle --comments \"/^!/\" --output dist/overview_percentage.min.js",
+    "js-minify-lesson_overview_before": "uglifyjs src/lesson_overview_before.js --compress typeofs=false --mangle --comments \"/^!/\" --output dist/lesson_overview_before.min.js",
+    "js-minify-lesson_overview_within": "uglifyjs src/lesson_overview_within.js --compress typeofs=false --mangle --comments \"/^!/\" --output dist/lesson_overview_within.min.js",
+    "js-minify-lesson_overview_after": "uglifyjs src/lesson_overview_after.js --compress typeofs=false --mangle --comments \"/^!/\" --output dist/lesson_overview_after.min.js",
+    "js-minify-lesson_overview_anytime": "uglifyjs src/lesson_overview_anytime.js --compress typeofs=false --mangle --comments \"/^!/\" --output dist/lesson_overview_anytime.min.js"
   },
   "repository": {
     "type": "git",
