@@ -1,3 +1,8 @@
+/*!
+  * overview_percentage.js v0.1.0
+  * (c) Jεan Sacren <sakiwit@gmail.com>
+  * AGPL-3.0
+  */
 window.jQuery(function ($) {
   function checkUrl (url) {
     var forUvu = [
