@@ -55,10 +55,9 @@ window.jQuery(function ($) {
         $.post(url, $(this).serialize(), function (data) {
           var course = $('select option:selected').text().replace(/-/g, ' ')
           var selected = parseInt($('select option:selected').val())
-          var d = {}
+          var d = $.parseJSON(data)
           var a = []
 
-          d = $.parseJSON(data)
           if (d.length === 0) {
             $('form + div').html('Data error!')
             return

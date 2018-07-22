@@ -61,14 +61,13 @@ window.jQuery(function ($) {
       var msg = ' students visited overview page.'
       var selected = parseInt($('select option:selected').val())
       var pattern = /(week|lesson)-([1-9]|1[0-6])-overview|overview-(lesson|week)-([1-9]|1[0-6])/i
-      var d = {}
+      var d = $.parseJSON(data)
       var courseUsers = []
       var overviewUsers = {
         lessonId: []
       }
       var p
 
-      d = $.parseJSON(data)
       if (d.length === 0) {
         $('form + div').html('No enrollment.')
         return
