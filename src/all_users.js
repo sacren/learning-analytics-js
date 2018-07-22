@@ -55,7 +55,7 @@ window.jQuery(function ($) {
         $.post(url, $(this).serialize(), function (data) {
           var course = $('select option:selected').text().replace(/-/g, ' ')
           var selected = parseInt($('select option:selected').val())
-          var d = $.parseJSON(data)
+          var d = JSON.parse(data)
           var a = []
 
           if (d.length === 0) {

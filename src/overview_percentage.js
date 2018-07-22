@@ -43,7 +43,7 @@ window.jQuery(function ($) {
       var msg = ' students visited overview page'
       var selected = parseInt($('select option:selected').val())
       var pattern = /overview/i
-      var d = $.parseJSON(data)
+      var d = JSON.parse(data)
       var a = []
       var b = []
       var p

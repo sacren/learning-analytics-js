@@ -61,7 +61,7 @@ window.jQuery(function ($) {
       var msg = ' students visited overview page.'
       var selected = parseInt($('select option:selected').val())
       var pattern = /(week|lesson)-([1-9]|1[0-6])-overview|overview-(lesson|week)-([1-9]|1[0-6])/i
-      var d = $.parseJSON(data)
+      var d = JSON.parse(data)
       var courseUsers = []
       var overviewUsers = {
         lessonId: []
