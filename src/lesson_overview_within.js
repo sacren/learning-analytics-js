@@ -26,8 +26,7 @@ window.jQuery(function ($) {
   }
 
   function setDisplayMsg () {
-    var msg = 'Would you like to show the lesson overview within the date range?'
-    $('form + div').html(msg)
+    $('form + div').html('Would you like to show the lesson overview within the date range?')
   }
 
   $('form').submit(function () {

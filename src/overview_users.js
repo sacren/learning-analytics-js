@@ -26,8 +26,7 @@ window.jQuery(function ($) {
   }
 
   function setDisplayMsg () {
-    var msg = 'Would you like to show how many overview users?'
-    $('form + div').html(msg)
+    $('form + div').html('Would you like to show how many overview users?')
   }
 
   $('form').submit(function () {

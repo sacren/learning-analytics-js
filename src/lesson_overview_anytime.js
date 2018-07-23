@@ -43,8 +43,7 @@ window.jQuery(function ($) {
   }
 
   function setDisplayMsg () {
-    var msg = 'Would you like to show overview page per lesson at any time?'
-    $('form + div').html(msg)
+    $('form + div').html('Would you like to show overview page per lesson at any time?')
   }
 
   $('form').submit(function () {
