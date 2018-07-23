@@ -4,8 +4,8 @@
   "description": "JS engine for Learning Analytics.",
   "main": "dist/liblax.js",
   "scripts": {
-    "build": "npm install",
     "clean": "rm -rf dist && mkdir dist",
+    "build": "npm-run-all clean js-minify",
     "test": "npm-run-all clean js-minify",
     "js-minify": "npm-run-all --parallel js-minify-*",
     "js-minify-common": "uglifyjs src/common.js --compress typeofs=false --mangle --comments \"/^!/\" --output dist/common.min.js",
