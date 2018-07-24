@@ -45,7 +45,7 @@ window.jQuery(function ($) {
       var d = JSON.parse(data)
       var a = []
       var b = []
-      var p
+      var p, n, m
 
       if (d.length === 0) {
         $('form + div').html('No enrollment.')
@@ -72,8 +72,8 @@ window.jQuery(function ($) {
         }
       }
 
-      var n = a.length
-      var m = b.length
+      n = a.length
+      m = b.length
 
       if (n === 0) {
         $('form + div').html(function () {
