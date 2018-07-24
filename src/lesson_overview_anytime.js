@@ -56,21 +56,29 @@ window.jQuery(function ($) {
     $('form + div').html(msg)
 
     $.post(url, $(this).serialize(), function (data) {
-      var course = $('select option:selected').text().replace(/-/g, ' ')
       var msg = ' students visited overview page.'
-      var selected = parseInt($('select option:selected').val())
       var pattern = /(week|lesson)-([1-9]|1[0-6])-overview|overview-(lesson|week)-([1-9]|1[0-6])/i
       var d = JSON.parse(data)
       var courseUsers = []
       var overviewUsers = {
         lessonId: []
       }
-      var p
+      var p, course, selected
 
       if (d.length === 0) {
         $('form + div').html('No enrollment.')
         return
       }
+
+      $('select option:selected').text(function (i, s) {
+        course = s.replace(/-/g, ' ')
+        return s
+      })
+
+      $('select option:selected').val(function (i, s) {
+        selected = parseInt(s)
+        return s
+      })
 
       for (i in d) {
         var courseId = parseInt(d[i]['course_id'])
