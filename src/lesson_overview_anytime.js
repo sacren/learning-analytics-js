@@ -136,21 +136,24 @@ window.jQuery(function ($) {
       }
 
       for (i = 0; i < lessonNumber; i++) {
-        var lessonId = overviewUsers.lessonId.sort(doLessonOrder)[i]
-        var count = overviewUsers[lessonId].length
+        var lessonId, count, lessonStr
+
+        lessonId = overviewUsers.lessonId.sort(doLessonOrder)[i]
+        lessonStr = '<div>Lesson ' + lessonId + ':</div>'
+        count = overviewUsers[lessonId].length
 
         switch (count) {
           case 0:
-            lessonMsg += openDiv + 'Lesson ' + lessonId + ':' + closeDiv
+            lessonMsg += lessonStr
             lessonMsg += openDiv + 'No ' + msg + closeDiv
             break
           case userNumber:
-            lessonMsg += openDiv + 'Lesson ' + lessonId + ':' + closeDiv
+            lessonMsg += lessonStr
             lessonMsg += openDiv + userNumber + ' or 100%' + msg + closeDiv
             break
           default:
             p = count / userNumber * 100
-            lessonMsg += openDiv + 'Lesson ' + lessonId + ':' + closeDiv
+            lessonMsg += lessonStr
             lessonMsg += openDiv + count + ' or ' + p.toPrecision(2) + '%' + msg + closeDiv
         }
       }
