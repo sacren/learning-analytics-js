@@ -29,7 +29,7 @@ window.jQuery(function ($) {
 
     for (var i = 0; i < tmp.length; i++) {
       lesson = tmp[i]
-      if (!isNaN(lesson)) { break }
+      if (Number(lesson)) { break }
     }
 
     return lesson
