@@ -22,8 +22,7 @@ window.jQuery(function ($) {
   }
 
   function getLesson (s) {
-    var lesson
-    var tmp
+    var lesson, tmp
 
     tmp = s.split('/')
     tmp = tmp[tmp.length - 1].split('-')
