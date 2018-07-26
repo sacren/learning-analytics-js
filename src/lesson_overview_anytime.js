@@ -43,7 +43,6 @@ window.jQuery(function ($) {
   $('form').submit(function () {
     var url = 'https://mediafiles.uvu.edu/lib/pages.php'
     var msg = 'Pulling data, please wait...'
-    var i
 
     url = checkUrl(url)
     $('form input').prop('disabled', true)
@@ -74,7 +73,7 @@ window.jQuery(function ($) {
         return s
       })
 
-      for (i in d) {
+      for (var i in d) {
         var courseId = parseInt(d[i]['course_id'])
         var uid = parseInt(d[i]['user_id'])
         var match = d[i]['http_request_clean']
@@ -132,10 +131,10 @@ window.jQuery(function ($) {
       /* sort the array in increase order */
       overviewUsers.lessonId.sort(function (a, b) { return a - b })
 
-      for (i = 0; i < overviewUsers.lessonId.length; i++) {
+      for (var j = 0; j < overviewUsers.lessonId.length; j++) {
         var lessonId, count, lessonStr
 
-        lessonId = overviewUsers.lessonId[i]
+        lessonId = overviewUsers.lessonId[j]
         lessonStr = '<div>Lesson ' + lessonId + ':</div>'
         count = overviewUsers[lessonId].length
 
