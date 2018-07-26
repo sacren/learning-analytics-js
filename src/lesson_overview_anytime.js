@@ -22,17 +22,14 @@ window.jQuery(function ($) {
   }
 
   function getLesson (s) {
-    var lesson, tmp
+    var tmp
 
     tmp = s.split('/')
     tmp = tmp[tmp.length - 1].split('-')
 
     for (var i = 0; i < tmp.length; i++) {
-      lesson = tmp[i]
-      if (Number(lesson)) { break }
+      if (Number(tmp[i])) { return tmp[i] }
     }
-
-    return lesson
   }
 
   function setForm () {
