@@ -35,8 +35,6 @@ window.jQuery(function ($) {
     return lesson
   }
 
-  function doLessonOrder (x, y) { return x - y }
-
   function setForm () {
     $('form input').val('Show Overview Anytime')
   }
@@ -107,7 +105,6 @@ window.jQuery(function ($) {
 
       var lessonMsg = ''
       var userNumber = courseUsers.length
-      var lessonNumber = overviewUsers.lessonId.length
       var openDiv = '<div>'
       var closeDiv = '</div>'
       var openArticle = '<article>'
@@ -124,7 +121,7 @@ window.jQuery(function ($) {
         return
       }
 
-      if (lessonNumber === 0) {
+      if (overviewUsers.lessonId.length === 0) {
         $('form + div').html(function () {
           var line1 = openDiv + 'At any time: ' + course + closeDiv
           var line2 = openDiv + 'No student visited overview page of any lesson.' + closeDiv
@@ -135,10 +132,13 @@ window.jQuery(function ($) {
         return
       }
 
-      for (i = 0; i < lessonNumber; i++) {
+      /* sort the array in increase order */
+      overviewUsers.lessonId.sort(function (a, b) { return a - b })
+
+      for (i = 0; i < overviewUsers.lessonId.length; i++) {
         var lessonId, count, lessonStr
 
-        lessonId = overviewUsers.lessonId.sort(doLessonOrder)[i]
+        lessonId = overviewUsers.lessonId[i]
         lessonStr = '<div>Lesson ' + lessonId + ':</div>'
         count = overviewUsers[lessonId].length
 
