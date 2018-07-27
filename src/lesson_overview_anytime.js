@@ -103,15 +103,10 @@ window.jQuery(function ($) {
       var userNumber = courseUsers.length
       var openDiv = '<div>'
       var closeDiv = '</div>'
-      var openArticle = '<article>'
-      var closeArticle = '</article>'
 
       if (userNumber === 0) {
         $('form + div').html(function () {
-          var line1 = course
-          var line2 = openDiv + 'No enrollment.' + closeDiv
-
-          return line1 + line2
+          return course + '<div>No enrollment.</div>'
         })
 
         return
@@ -119,10 +114,7 @@ window.jQuery(function ($) {
 
       if (overviewUsers.lessonId.length === 0) {
         $('form + div').html(function () {
-          var line1 = course
-          var line2 = openDiv + 'No student visited overview page of any lesson.' + closeDiv
-
-          return line1 + line2
+          return course + '<div>No student visited overview page of any lesson.</div>'
         })
 
         return
@@ -155,10 +147,7 @@ window.jQuery(function ($) {
       }
 
       $('form + div').html(function () {
-        var line1 = course
-        var line2 = openArticle + lessonMsg + closeArticle
-
-        return line1 + line2
+        return course + '<article>' + lessonMsg + '</article>'
       })
     }).fail(function () {
       window.alert('Error: Pulling data!')
