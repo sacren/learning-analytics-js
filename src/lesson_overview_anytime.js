@@ -64,7 +64,7 @@ window.jQuery(function ($) {
       }
 
       $('select option:selected').text(function (i, s) {
-        course = s.replace(/-/g, ' ')
+        course = '<div>At any time: ' + s.replace(/-/g, ' ') + '</div>'
         return s
       })
 
@@ -108,7 +108,7 @@ window.jQuery(function ($) {
 
       if (userNumber === 0) {
         $('form + div').html(function () {
-          var line1 = openDiv + 'At any time: ' + course + closeDiv
+          var line1 = course
           var line2 = openDiv + 'No enrollment.' + closeDiv
 
           return line1 + line2
@@ -119,7 +119,7 @@ window.jQuery(function ($) {
 
       if (overviewUsers.lessonId.length === 0) {
         $('form + div').html(function () {
-          var line1 = openDiv + 'At any time: ' + course + closeDiv
+          var line1 = course
           var line2 = openDiv + 'No student visited overview page of any lesson.' + closeDiv
 
           return line1 + line2
@@ -155,7 +155,7 @@ window.jQuery(function ($) {
       }
 
       $('form + div').html(function () {
-        var line1 = openDiv + 'At any time: ' + course + closeDiv
+        var line1 = course
         var line2 = openArticle + lessonMsg + closeArticle
 
         return line1 + line2
