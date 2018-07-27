@@ -56,7 +56,8 @@ window.jQuery(function ($) {
       var overviewUsers = {
         lessonId: []
       }
-      var p, course, selected
+      var lessonMsg = ''
+      var p, course, selected, userCount
 
       if (d.length === 0) {
         $('form + div').html('No enrollment.')
@@ -99,12 +100,9 @@ window.jQuery(function ($) {
         }
       }
 
-      var lessonMsg = ''
-      var userNumber = courseUsers.length
-      var openDiv = '<div>'
-      var closeDiv = '</div>'
+      userCount = courseUsers.length
 
-      if (userNumber === 0) {
+      if (userCount === 0) {
         $('form + div').html(function () {
           return course + '<div>No enrollment.</div>'
         })
@@ -133,16 +131,16 @@ window.jQuery(function ($) {
         switch (count) {
           case 0:
             lessonMsg += lessonStr
-            lessonMsg += openDiv + 'No ' + msg + closeDiv
+            lessonMsg += '<div>No ' + msg + '</div>'
             break
-          case userNumber:
+          case userCount:
             lessonMsg += lessonStr
-            lessonMsg += openDiv + userNumber + ' or 100%' + msg + closeDiv
+            lessonMsg += '<div>' + userCount + ' or 100%' + msg + '</div>'
             break
           default:
-            p = count / userNumber * 100
+            p = count / userCount * 100
             lessonMsg += lessonStr
-            lessonMsg += openDiv + count + ' or ' + p.toPrecision(2) + '%' + msg + closeDiv
+            lessonMsg += '<div>' + count + ' or ' + p.toPrecision(2) + '%' + msg + '</div>'
         }
       }
 
