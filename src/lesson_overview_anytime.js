@@ -136,7 +136,14 @@ window.jQuery(function ($) {
             break
           default:
             p = count / userCount * 100
-            lessonMsg += lessonStr + '<div>' + count + ' or ' + p.toPrecision(2) + '%' + msg + '</div>'
+
+            if (p >= 10) {
+              p = p.toPrecision(3)
+            } else {
+              p = p.toPrecision(2)
+            }
+
+            lessonMsg += lessonStr + '<div>' + count + ' or ' + p + '%' + msg + '</div>'
         }
       }
 
