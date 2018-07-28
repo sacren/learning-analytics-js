@@ -42,11 +42,10 @@ window.jQuery(function ($) {
 
   $('form').submit(function () {
     var url = 'https://mediafiles.uvu.edu/lib/pages.php'
-    var msg = 'Pulling data, please wait...'
 
     url = checkUrl(url)
     $('form input').prop('disabled', true)
-    $('form + div').html(msg)
+    $('form + div').html('Pulling data, please wait...')
 
     $.post(url, $(this).serialize(), function (data) {
       var msg = ' students visited overview page.'
