@@ -130,17 +130,14 @@ window.jQuery(function ($) {
 
         switch (count) {
           case 0:
-            lessonMsg += lessonStr
-            lessonMsg += '<div>No ' + msg + '</div>'
+            lessonMsg += lessonStr + '<div>No ' + msg + '</div>'
             break
           case userCount:
-            lessonMsg += lessonStr
-            lessonMsg += '<div>' + userCount + ' or 100%' + msg + '</div>'
+            lessonMsg += lessonStr + '<div>' + userCount + ' or 100%' + msg + '</div>'
             break
           default:
             p = count / userCount * 100
-            lessonMsg += lessonStr
-            lessonMsg += '<div>' + count + ' or ' + p.toPrecision(2) + '%' + msg + '</div>'
+            lessonMsg += lessonStr + '<div>' + count + ' or ' + p.toPrecision(2) + '%' + msg + '</div>'
         }
       }
 
