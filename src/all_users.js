@@ -83,10 +83,7 @@ window.jQuery(function ($) {
 
           if (a.length === 0) {
             $('form + div').html(function () {
-              var line1 = course
-              var line2 = '<div>' + 'No enrollment' + '</div>'
-
-              return line1 + line2
+              return course + '<div>No enrollment</div>'
             })
 
             return
@@ -94,20 +91,14 @@ window.jQuery(function ($) {
 
           if (a.length === 1) {
             $('form + div').html(function () {
-              var line1 = course
-              var line2 = '<div>' + 'One student in total' + '</div>'
-
-              return line1 + line2
+              return course + '<div>One student in total</div>'
             })
 
             return
           }
 
           $('form + div').html(function () {
-            var line1 = course
-            var line2 = '<div>' + a.length + ' students in total' + '</div>'
-
-            return line1 + line2
+            return course + '<div>' + a.length + ' students in total</div>'
           })
         }).fail(function () {
           window.alert('Error: Pulling data!')
