@@ -53,15 +53,24 @@ window.jQuery(function ($) {
         $('form + div').html('Pulling data, please wait...')
 
         $.post(url, $(this).serialize(), function (data) {
-          var course = $('select option:selected').text().replace(/-/g, ' ')
-          var selected = parseInt($('select option:selected').val())
           var d = JSON.parse(data)
           var a = []
+          var course, selected
 
           if (d.length === 0) {
             $('form + div').html('Data error!')
             return
           }
+
+          $('select option:selected').text(function (i, s) {
+            course = '<div>' + s.replace(/-/g, ' ') + '</div>'
+            return s
+          })
+
+          $('select option:selected').val(function (i, s) {
+            selected = parseInt(s)
+            return s
+          })
 
           for (var i in d) {
             var courseId = parseInt(d[i]['course_id'])
@@ -75,7 +84,7 @@ window.jQuery(function ($) {
           var n = a.length
           if (n === 0) {
             $('form + div').html(function () {
-              var line1 = '<div>' + course + '</div>'
+              var line1 = course
               var line2 = '<div>' + 'No enrollment' + '</div>'
 
               return line1 + line2
@@ -86,7 +95,7 @@ window.jQuery(function ($) {
 
           if (n === 1) {
             $('form + div').html(function () {
-              var line1 = '<div>' + course + '</div>'
+              var line1 = course
               var line2 = '<div>' + 'One student in total' + '</div>'
 
               return line1 + line2
@@ -96,7 +105,7 @@ window.jQuery(function ($) {
           }
 
           $('form + div').html(function () {
-            var line1 = '<div>' + course + '</div>'
+            var line1 = course
             var line2 = '<div>' + n + ' students in total' + '</div>'
 
             return line1 + line2
