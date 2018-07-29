@@ -81,8 +81,7 @@ window.jQuery(function ($) {
             if (!a.some(function (x) { return x === uid })) { a.push(uid) }
           }
 
-          var n = a.length
-          if (n === 0) {
+          if (a.length === 0) {
             $('form + div').html(function () {
               var line1 = course
               var line2 = '<div>' + 'No enrollment' + '</div>'
@@ -93,7 +92,7 @@ window.jQuery(function ($) {
             return
           }
 
-          if (n === 1) {
+          if (a.length === 1) {
             $('form + div').html(function () {
               var line1 = course
               var line2 = '<div>' + 'One student in total' + '</div>'
@@ -106,7 +105,7 @@ window.jQuery(function ($) {
 
           $('form + div').html(function () {
             var line1 = course
-            var line2 = '<div>' + n + ' students in total' + '</div>'
+            var line2 = '<div>' + a.length + ' students in total' + '</div>'
 
             return line1 + line2
           })
