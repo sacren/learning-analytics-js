@@ -4,6 +4,18 @@
   * AGPL-3.0
   */
 window.jQuery(function ($) {
+  function getPercent (a, b) {
+    var p = a / b * 100
+
+    if (p >= 10) {
+      p = p.toPrecision(3)
+    } else {
+      p = p.toPrecision(2)
+    }
+
+    return p
+  }
+
   function checkUrl (url) {
     var forUvu = [
       'for-uvu',
@@ -56,7 +68,7 @@ window.jQuery(function ($) {
         lessonId: []
       }
       var lessonMsg = ''
-      var p, course, selected, userCount
+      var course, selected, userCount
 
       if (d.length === 0) {
         $('form + div').html('No enrollment.')
@@ -135,15 +147,7 @@ window.jQuery(function ($) {
             lessonMsg += lessonStr + '<div>' + userCount + ' or 100%' + msg + '</div>'
             break
           default:
-            p = count / userCount * 100
-
-            if (p >= 10) {
-              p = p.toPrecision(3)
-            } else {
-              p = p.toPrecision(2)
-            }
-
-            lessonMsg += lessonStr + '<div>' + count + ' or ' + p + '%' + msg + '</div>'
+            lessonMsg += lessonStr + '<div>' + count + ' or ' + getPercent(count, userCount) + '%' + msg + '</div>'
         }
       }
 
