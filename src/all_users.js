@@ -21,6 +21,20 @@ window.jQuery(function ($) {
     return url
   }
 
+  function mkUidArray (opt, json) {
+    var arr = []
+
+    for (var i in json) {
+      var uid = parseInt(json[i]['user_id'])
+
+      if (opt !== parseInt(json[i]['course_id'])) { continue }
+
+      if (!arr.some(function (x) { return x === uid })) { arr.push(uid) }
+    }
+
+    return arr
+  }
+
   var analytics = {
     init: function () {
       analytics.setDisplayMsg()
@@ -54,8 +68,7 @@ window.jQuery(function ($) {
 
         $.post(url, $(this).serialize(), function (data) {
           var d = JSON.parse(data)
-          var a = []
-          var course, selected
+          var course, selected, a
 
           if (d.length === 0) {
             $('form + div').html('Data error!')
@@ -72,14 +85,7 @@ window.jQuery(function ($) {
             return s
           })
 
-          for (var i in d) {
-            var courseId = parseInt(d[i]['course_id'])
-            var uid = parseInt(d[i]['user_id'])
-
-            if (courseId !== selected) { continue }
-
-            if (!a.some(function (x) { return x === uid })) { a.push(uid) }
-          }
+          a = mkUidArray(selected, d)
 
           if (a.length === 0) {
             $('form + div').html(function () {
