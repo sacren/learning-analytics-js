@@ -68,7 +68,7 @@ window.jQuery(function ($) {
 
         $.post(url, $(this).serialize(), function (data) {
           var d = JSON.parse(data)
-          var course, selected, a
+          var course, a
 
           if (d.length === 0) {
             $('form + div').html('Data error!')
@@ -81,11 +81,9 @@ window.jQuery(function ($) {
           })
 
           $('select option:selected').val(function (i, s) {
-            selected = parseInt(s)
+            a = mkUidArray(parseInt(s), d)
             return s
           })
-
-          a = mkUidArray(selected, d)
 
           if (a.length === 0) {
             $('form + div').html(function () {
