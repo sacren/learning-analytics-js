@@ -45,31 +45,31 @@ window.jQuery(function ($) {
   }
 
   function getLessonMsg (overview, course) {
-    var msg = ' students visited overview page.'
-    var userCount = course.length
-    var lessonMsg = ''
-    var lesson, count
+    var str = ' students visited overview page.'
+    var fullCount = course.length
+    var msg = ''
+    var name, count
 
     /* sort the array in increase order */
     overview.lessonId.sort(function (a, b) { return a - b })
 
     for (var i = 0; i < overview.lessonId.length; i++) {
-      lesson = '<div>Lesson ' + overview.lessonId[i] + ':</div>'
+      name = '<div>Lesson ' + overview.lessonId[i] + ':</div>'
       count = overview[ overview.lessonId[i] ].length
 
       switch (count) {
         case 0:
-          lessonMsg += lesson + '<div>No ' + msg + '</div>'
+          msg += name + '<div>No ' + str + '</div>'
           break
-        case userCount:
-          lessonMsg += lesson + '<div>' + userCount + ' or 100%' + msg + '</div>'
+        case fullCount:
+          msg += name + '<div>' + fullCount + ' or 100%' + str + '</div>'
           break
         default:
-          lessonMsg += lesson + '<div>' + count + ' or ' + getPercent(count, userCount) + '%' + msg + '</div>'
+          msg += name + '<div>' + count + ' or ' + getPercent(count, fullCount) + '%' + str + '</div>'
       }
     }
 
-    return lessonMsg
+    return msg
   }
 
   function setForm () {
