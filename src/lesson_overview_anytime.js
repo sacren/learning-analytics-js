@@ -44,6 +44,34 @@ window.jQuery(function ($) {
     }
   }
 
+  function getLessonMsg (overview, course) {
+    var msg = ' students visited overview page.'
+    var userCount = course.length
+    var lessonMsg = ''
+    var lesson, count
+
+    /* sort the array in increase order */
+    overview.lessonId.sort(function (a, b) { return a - b })
+
+    for (var i = 0; i < overview.lessonId.length; i++) {
+      lesson = '<div>Lesson ' + overview.lessonId[i] + ':</div>'
+      count = overview[ overview.lessonId[i] ].length
+
+      switch (count) {
+        case 0:
+          lessonMsg += lesson + '<div>No ' + msg + '</div>'
+          break
+        case userCount:
+          lessonMsg += lesson + '<div>' + userCount + ' or 100%' + msg + '</div>'
+          break
+        default:
+          lessonMsg += lesson + '<div>' + count + ' or ' + getPercent(count, userCount) + '%' + msg + '</div>'
+      }
+    }
+
+    return lessonMsg
+  }
+
   function setForm () {
     $('form input').val('Show Overview Anytime')
   }
@@ -60,15 +88,13 @@ window.jQuery(function ($) {
     $('form + div').html('Pulling data, please wait...')
 
     $.post(url, $(this).serialize(), function (data) {
-      var msg = ' students visited overview page.'
       var pattern = /(week|lesson)-([1-9]|1[0-6])-overview|overview-(lesson|week)-([1-9]|1[0-6])/i
       var d = JSON.parse(data)
       var courseUsers = []
       var overviewUsers = {
         lessonId: []
       }
-      var lessonMsg = ''
-      var course, selected, userCount
+      var course, selected
 
       if (d.length === 0) {
         $('form + div').html('No enrollment.')
@@ -111,9 +137,7 @@ window.jQuery(function ($) {
         }
       }
 
-      userCount = courseUsers.length
-
-      if (userCount === 0) {
+      if (courseUsers.length === 0) {
         $('form + div').html(function () {
           return course + '<div>No enrollment.</div>'
         })
@@ -129,30 +153,8 @@ window.jQuery(function ($) {
         return
       }
 
-      /* sort the array in increase order */
-      overviewUsers.lessonId.sort(function (a, b) { return a - b })
-
-      for (var j = 0; j < overviewUsers.lessonId.length; j++) {
-        var lessonId, count, lessonStr
-
-        lessonId = overviewUsers.lessonId[j]
-        lessonStr = '<div>Lesson ' + lessonId + ':</div>'
-        count = overviewUsers[lessonId].length
-
-        switch (count) {
-          case 0:
-            lessonMsg += lessonStr + '<div>No ' + msg + '</div>'
-            break
-          case userCount:
-            lessonMsg += lessonStr + '<div>' + userCount + ' or 100%' + msg + '</div>'
-            break
-          default:
-            lessonMsg += lessonStr + '<div>' + count + ' or ' + getPercent(count, userCount) + '%' + msg + '</div>'
-        }
-      }
-
       $('form + div').html(function () {
-        return course + '<article>' + lessonMsg + '</article>'
+        return course + '<article>' + getLessonMsg(overviewUsers, courseUsers) + '</article>'
       })
     }).fail(function () {
       window.alert('Error: Pulling data!')
