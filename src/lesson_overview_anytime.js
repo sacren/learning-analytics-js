@@ -44,6 +44,35 @@ window.jQuery(function ($) {
     }
   }
 
+  function setOverviewAndCourse (opt, overview, course, json) {
+    for (var i in json) {
+      var pattern = /(week|lesson)-([1-9]|1[0-6])-overview|overview-(lesson|week)-([1-9]|1[0-6])/i
+      var courseId = parseInt(json[i]['course_id'])
+      var uid = parseInt(json[i]['user_id'])
+      var match = json[i]['http_request_clean']
+      var lesson
+
+      if (courseId !== opt) { continue }
+
+      if (!course.some(function (x) { return x === uid })) { course.push(uid) }
+
+      if (pattern.test(match)) {
+        lesson = getLesson(match)
+        if (!overview.lessonId.some(function (x) { return x === lesson })) {
+          overview.lessonId.push(lesson)
+        }
+
+        if (overview.hasOwnProperty(lesson)) {
+          if (!overview[lesson].some(function (x) { return x === uid })) {
+            overview[lesson].push(uid)
+          }
+        } else {
+          overview[lesson] = [ uid ]
+        }
+      }
+    }
+  }
+
   function getLessonMsg (overview, course) {
     var str = ' students visited overview page.'
     var fullCount = course.length
@@ -88,13 +117,12 @@ window.jQuery(function ($) {
     $('form + div').html('Pulling data, please wait...')
 
     $.post(url, $(this).serialize(), function (data) {
-      var pattern = /(week|lesson)-([1-9]|1[0-6])-overview|overview-(lesson|week)-([1-9]|1[0-6])/i
       var d = JSON.parse(data)
       var courseUsers = []
       var overviewUsers = {
         lessonId: []
       }
-      var course, selected
+      var course
 
       if (d.length === 0) {
         $('form + div').html('No enrollment.')
@@ -107,35 +135,9 @@ window.jQuery(function ($) {
       })
 
       $('select option:selected').val(function (i, s) {
-        selected = parseInt(s)
+        setOverviewAndCourse(parseInt(s), overviewUsers, courseUsers, d)
         return s
       })
-
-      for (var i in d) {
-        var courseId = parseInt(d[i]['course_id'])
-        var uid = parseInt(d[i]['user_id'])
-        var match = d[i]['http_request_clean']
-        var lesson
-
-        if (courseId !== selected) { continue }
-
-        if (!courseUsers.some(function (x) { return x === uid })) { courseUsers.push(uid) }
-
-        if (pattern.test(match)) {
-          lesson = getLesson(match)
-          if (!overviewUsers.lessonId.some(function (x) { return x === lesson })) {
-            overviewUsers.lessonId.push(lesson)
-          }
-
-          if (overviewUsers.hasOwnProperty(lesson)) {
-            if (!overviewUsers[lesson].some(function (x) { return x === uid })) {
-              overviewUsers[lesson].push(uid)
-            }
-          } else {
-            overviewUsers[lesson] = [ uid ]
-          }
-        }
-      }
 
       if (courseUsers.length === 0) {
         $('form + div').html(function () {
