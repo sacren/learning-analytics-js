@@ -44,7 +44,7 @@ window.jQuery(function ($) {
     }
   }
 
-  function setOverviewAndCourse (opt, overview, course, json) {
+  function setOverviewAndCourse (opt, o, json) {
     var pattern, uid, match, lesson
 
     for (var i in json) {
@@ -54,37 +54,37 @@ window.jQuery(function ($) {
 
       if (opt !== parseInt(json[i]['course_id'])) { continue }
 
-      if (!course.some(function (x) { return x === uid })) { course.push(uid) }
+      if (!o.course.some(function (x) { return x === uid })) { o.course.push(uid) }
 
       if (pattern.test(match)) {
         lesson = getLesson(match)
-        if (!overview.lessonId.some(function (x) { return x === lesson })) {
-          overview.lessonId.push(lesson)
+        if (!o.overview.lessonId.some(function (x) { return x === lesson })) {
+          o.overview.lessonId.push(lesson)
         }
 
-        if (overview.hasOwnProperty(lesson)) {
-          if (!overview[lesson].some(function (x) { return x === uid })) {
-            overview[lesson].push(uid)
+        if (o.overview.hasOwnProperty(lesson)) {
+          if (!o.overview[lesson].some(function (x) { return x === uid })) {
+            o.overview[lesson].push(uid)
           }
         } else {
-          overview[lesson] = [ uid ]
+          o.overview[lesson] = [ uid ]
         }
       }
     }
   }
 
-  function getLessonMsg (overview, course) {
+  function getLessonMsg (o) {
     var str = ' students visited overview page.'
-    var fullCount = course.length
+    var fullCount = o.course.length
     var msg = ''
     var name, count
 
     /* sort the array in increase order */
-    overview.lessonId.sort(function (a, b) { return a - b })
+    o.overview.lessonId.sort(function (a, b) { return a - b })
 
-    for (var i = 0; i < overview.lessonId.length; i++) {
-      name = '<div>Lesson ' + overview.lessonId[i] + ':</div>'
-      count = overview[ overview.lessonId[i] ].length
+    for (var i = 0; i < o.overview.lessonId.length; i++) {
+      name = '<div>Lesson ' + o.overview.lessonId[i] + ':</div>'
+      count = o.overview[ o.overview.lessonId[i] ].length
 
       switch (count) {
         case 0:
@@ -118,9 +118,11 @@ window.jQuery(function ($) {
 
     $.post(url, $(this).serialize(), function (data) {
       var d = JSON.parse(data)
-      var courseUsers = []
-      var overviewUsers = {
-        lessonId: []
+      var users = {
+        course: [],
+        overview: {
+          lessonId: []
+        }
       }
       var course
 
@@ -135,11 +137,11 @@ window.jQuery(function ($) {
       })
 
       $('select option:selected').val(function (i, s) {
-        setOverviewAndCourse(parseInt(s), overviewUsers, courseUsers, d)
+        setOverviewAndCourse(parseInt(s), users, d)
         return s
       })
 
-      if (courseUsers.length === 0) {
+      if (users.course.length === 0) {
         $('form + div').html(function () {
           return course + '<div>No enrollment.</div>'
         })
@@ -147,7 +149,7 @@ window.jQuery(function ($) {
         return
       }
 
-      if (overviewUsers.lessonId.length === 0) {
+      if (users.overview.lessonId.length === 0) {
         $('form + div').html(function () {
           return course + '<div>No student visited overview page of any lesson.</div>'
         })
@@ -156,7 +158,7 @@ window.jQuery(function ($) {
       }
 
       $('form + div').html(function () {
-        return course + '<article>' + getLessonMsg(overviewUsers, courseUsers) + '</article>'
+        return course + '<article>' + getLessonMsg(users) + '</article>'
       })
     }).fail(function () {
       window.alert('Error: Pulling data!')
