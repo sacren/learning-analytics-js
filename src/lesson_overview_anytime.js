@@ -47,12 +47,11 @@ window.jQuery(function ($) {
   function setOverviewAndCourse (opt, overview, course, json) {
     for (var i in json) {
       var pattern = /(week|lesson)-([1-9]|1[0-6])-overview|overview-(lesson|week)-([1-9]|1[0-6])/i
-      var courseId = parseInt(json[i]['course_id'])
       var uid = parseInt(json[i]['user_id'])
       var match = json[i]['http_request_clean']
       var lesson
 
-      if (courseId !== opt) { continue }
+      if (opt !== parseInt(json[i]['course_id'])) { continue }
 
       if (!course.some(function (x) { return x === uid })) { course.push(uid) }
 
