@@ -44,6 +44,10 @@ window.jQuery(function ($) {
     }
   }
 
+  function setCourseName (name, o) {
+    o.courseName = '<div>At any time: ' + name.replace(/-/g, ' ') + '</div>'
+  }
+
   function setOverviewAndCourse (opt, o, json) {
     var pattern, uid, match, lesson
 
@@ -124,7 +128,6 @@ window.jQuery(function ($) {
           lessonId: []
         }
       }
-      var course
 
       if (d.length === 0) {
         $('form + div').html('No enrollment.')
@@ -132,7 +135,7 @@ window.jQuery(function ($) {
       }
 
       $('select option:selected').text(function (i, s) {
-        course = '<div>At any time: ' + s.replace(/-/g, ' ') + '</div>'
+        setCourseName(s, users)
         return s
       })
 
@@ -143,7 +146,7 @@ window.jQuery(function ($) {
 
       if (users.course.length === 0) {
         $('form + div').html(function () {
-          return course + '<div>No enrollment.</div>'
+          return users.courseName + '<div>No enrollment.</div>'
         })
 
         return
@@ -151,14 +154,14 @@ window.jQuery(function ($) {
 
       if (users.overview.lessonId.length === 0) {
         $('form + div').html(function () {
-          return course + '<div>No student visited overview page of any lesson.</div>'
+          return users.courseName + '<div>No student visited overview page of any lesson.</div>'
         })
 
         return
       }
 
       $('form + div').html(function () {
-        return course + '<article>' + getLessonMsg(users) + '</article>'
+        return users.courseName + '<article>' + getLessonMsg(users) + '</article>'
       })
     }).fail(function () {
       window.alert('Error: Pulling data!')
