@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf dist && mkdir dist",
     "build": "npm-run-all clean js-minify",
-    "test": "npm-run-all clean js-minify",
+    "test": "standard",
     "js-minify": "npm-run-all --parallel js-minify-*",
     "js-minify-common": "uglifyjs src/common.js --compress typeofs=false --mangle --comments \"/^!/\" --output dist/common.min.js",
     "js-minify-all_users": "uglifyjs src/all_users.js --compress typeofs=false --mangle --comments \"/^!/\" --output dist/all_users.min.js",
